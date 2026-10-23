@@ -51,7 +51,7 @@ size = Vector3(4, 1, 4)
 size = Vector3(4, 1, 4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o6u5s"]
-size = Vector3(2, 2, 2)
+size = Vector3(10, 10, 10)
 
 [sub_resource type="BoxMesh" id="BoxMesh_30kgw"]
 size = Vector3(2, 2, 2)
@@ -148,4 +148,4 @@ offset_bottom = 49.0
 theme_override_font_sizes/font_size = 48
 text = "LEVEL COMPLETE ! Press R"
 
-[connection signal="body_entered" from="Level1/Goal" to="Player" method="_on_body_entered"]
+[connection signal="body_entered" from="Level1/Goal" to="Level1/Goal" method="_on_body_entered"]

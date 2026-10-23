@@ -5,6 +5,7 @@ const SPRINT_SPEED = 8.0
 const JUMP_VELOCITY = 5.0
 const GRAVITY = 12.0
 const MOUSE_SENSITIVITY = 0.003
+const FALL_LIMIT = -10.0
 
 @onready var camera = $Camera3D
 
@@ -18,6 +19,8 @@ func _unhandled_input(event):
 		camera.rotation.x = clamp(camera.rotation.x, -1.5, 1.5)
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	if event.is_action_pressed("restart"):
+		get_tree().reload_current_scene()
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -36,6 +39,5 @@ func _physics_process(delta):
 	velocity.z = direction.z * current_speed
 	move_and_slide()
 
-
-func _on_body_entered(body: Node3D) -> void:
-	pass # Replace with function body.
+	if global_position.y < FALL_LIMIT:
+		get_tree().reload_current_scene()
