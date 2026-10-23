@@ -5,12 +5,8 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0xm2m"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_o6u5s"]
-radius = 0.4
-height = 1.8
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jspg8"]
-albedo_color = Color(0, 0.08627451, 1, 1)
+[sub_resource type="BoxMesh" id="BoxMesh_33mkk"]
+size = Vector3(0.65, 0.9, 0.35)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hmudf"]
 albedo_color = Color(0.101960786, 0.101960786, 0.18039216, 1)
@@ -83,6 +79,22 @@ glow_intensity = 0.6
 glow_bloom = 0.2
 glow_hdr_threshold = 0.9
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6u5s"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.02745098, 0.07450981, 0.12941177, 0.8)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0.8509804, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [node name="Main" type="Node3D" unique_id=1009966630]
 
 [node name="Player" type="CharacterBody3D" parent="." unique_id=524491024]
@@ -95,14 +107,18 @@ shape = SubResource("CapsuleShape3D_0xm2m")
 [node name="CameraPivot" type="Node3D" parent="Player" unique_id=1292288098]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
+[node name="Camera3D" type="Camera3D" parent="Player/CameraPivot" unique_id=307765028]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 4)
+
 [node name="SpringArm3D" type="SpringArm3D" parent="Player/CameraPivot" unique_id=95113002]
 spring_length = 4.5
 
-[node name="Camera3D" type="Camera3D" parent="Player/CameraPivot/SpringArm3D" unique_id=307765028]
-
 [node name="Visual" type="MeshInstance3D" parent="Player" unique_id=201468983]
-mesh = SubResource("CapsuleMesh_o6u5s")
-surface_material_override/0 = SubResource("StandardMaterial3D_jspg8")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1)
+
+[node name="Torso" type="MeshInstance3D" parent="Player/Visual" unique_id=1108684592]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+mesh = SubResource("BoxMesh_33mkk")
 
 [node name="Level1" type="Node3D" parent="." unique_id=2121321819]
 
@@ -198,22 +214,28 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
-[node name="StageTitle" type="Label" parent="GameHUD/HUDLayout" unique_id=1455298338]
-layout_mode = 1
-offset_left = 30.0
-offset_top = 25.0
-offset_right = 340.0
-offset_bottom = 59.0
-theme_override_font_sizes/font_size = 24
+[node name="HeaderPanel" type="PanelContainer" parent="GameHUD/HUDLayout" unique_id=1738567130]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 306.0
+offset_bottom = 76.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_o6u5s")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameHUD/HUDLayout/HeaderPanel" unique_id=1899356748]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="StageTitle" type="Label" parent="GameHUD/HUDLayout/HeaderPanel/VBoxContainer" unique_id=1455298338]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.8509804, 1, 1)
+theme_override_font_sizes/font_size = 20
 text = "GLITCHVERSE // SECTOR 01"
 
-[node name="ObjectiveLabel" type="Label" parent="GameHUD/HUDLayout" unique_id=435943113]
-layout_mode = 0
-offset_left = 30.0
-offset_top = 60.0
-offset_right = 228.0
-offset_bottom = 83.0
+[node name="ObjectiveLabel" type="Label" parent="GameHUD/HUDLayout/HeaderPanel/VBoxContainer" unique_id=435943113]
+layout_mode = 2
 text = "OBJECTIVE: FIND THE EXIT"
 
 [connection signal="body_entered" from="Level1/Goal" to="Level1/Goal" method="_on_body_entered"]
