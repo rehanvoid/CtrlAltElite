@@ -35,3 +35,7 @@ func _physics_process(delta):
 	velocity.x = direction.x * current_speed
 	velocity.z = direction.z * current_speed
 	move_and_slide()
+
+
+func _on_body_entered(body: Node3D) -> void:
+	pass # Replace with function body.
