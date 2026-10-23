@@ -1,0 +1,151 @@
+[gd_scene format=3 uid="uid://cebonw3u63w8q"]
+
+[ext_resource type="Script" uid="uid://oll2cicju4jv" path="res://player.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://nopw6xpcvet" path="res://goal.gd" id="2_0xm2m"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0xm2m"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hmudf"]
+albedo_color = Color(0.101960786, 0.101960786, 0.18039216, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_o6u5s"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jspg8"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k0583"]
+albedo_color = Color(0, 0.8980392, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gxw1m"]
+size = Vector3(4, 1, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lilwh"]
+size = Vector3(4, 1, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q3lnd"]
+albedo_color = Color(0, 0.8980392, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lilwh"]
+size = Vector3(4, 1, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_30kgw"]
+size = Vector3(4, 1, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bvv42"]
+albedo_color = Color(0, 0.8980392, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_y2m7j"]
+size = Vector3(4, 1, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j5rh5"]
+size = Vector3(4, 1, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n6bpu"]
+albedo_color = Color(0, 0.8980392, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nlxnr"]
+size = Vector3(4, 1, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ddffp"]
+size = Vector3(4, 1, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o6u5s"]
+size = Vector3(2, 3, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_30kgw"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y2m7j"]
+albedo_color = Color(0, 1, 0.4, 1)
+
+[node name="Main" type="Node3D" unique_id=1009966630]
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=524491024]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = ExtResource("1_ig7tw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=2076937463]
+shape = SubResource("CapsuleShape3D_0xm2m")
+
+[node name="Camera3D" type="Camera3D" parent="Player" unique_id=307765028]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+
+[node name="Level1" type="Node3D" parent="." unique_id=2121321819]
+
+[node name="Floor" type="StaticBody3D" parent="Level1" unique_id=151907988]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level1/Floor" unique_id=1902613307]
+material_override = SubResource("StandardMaterial3D_hmudf")
+mesh = SubResource("BoxMesh_o6u5s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level1/Floor" unique_id=951000767]
+shape = SubResource("BoxShape3D_jspg8")
+
+[node name="Platform1" type="StaticBody3D" parent="Level1" unique_id=2129794565]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level1/Platform1" unique_id=1728820314]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
+material_override = SubResource("StandardMaterial3D_k0583")
+mesh = SubResource("BoxMesh_gxw1m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level1/Platform1" unique_id=1172880411]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
+shape = SubResource("BoxShape3D_lilwh")
+
+[node name="Platform2" type="StaticBody3D" parent="Level1" unique_id=2010899978]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level1/Platform2" unique_id=500466756]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -14)
+material_override = SubResource("StandardMaterial3D_q3lnd")
+mesh = SubResource("BoxMesh_lilwh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level1/Platform2" unique_id=1413441786]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -14)
+shape = SubResource("BoxShape3D_30kgw")
+
+[node name="Platform3" type="StaticBody3D" parent="Level1" unique_id=1216137329]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level1/Platform3" unique_id=972402782]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -19)
+material_override = SubResource("StandardMaterial3D_bvv42")
+mesh = SubResource("BoxMesh_y2m7j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level1/Platform3" unique_id=544639898]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -19)
+shape = SubResource("BoxShape3D_j5rh5")
+
+[node name="Platform4" type="StaticBody3D" parent="Level1" unique_id=381563224]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level1/Platform4" unique_id=728567652]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.5, -24)
+material_override = SubResource("StandardMaterial3D_n6bpu")
+mesh = SubResource("BoxMesh_nlxnr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level1/Platform4" unique_id=2029283834]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.5, -24)
+shape = SubResource("BoxShape3D_ddffp")
+
+[node name="Goal" type="Area3D" parent="Level1" unique_id=1217639444]
+position = Vector3(4, 3, -24)
+script = ExtResource("2_0xm2m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level1/Goal" unique_id=1034653658]
+shape = SubResource("BoxShape3D_o6u5s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level1/Goal" unique_id=68323972]
+mesh = SubResource("BoxMesh_30kgw")
+surface_material_override/0 = SubResource("StandardMaterial3D_y2m7j")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Level1/Goal" unique_id=1507600571]
+offset = Vector2(300, 280)
+transform = Transform2D(1, 0, 0, 1, 300, 280)
+
+[node name="WinLabel" type="Label" parent="Level1/Goal/CanvasLayer" unique_id=422370190]
+visible = false
+offset_right = 40.0
+offset_bottom = 49.0
+theme_override_font_sizes/font_size = 48
+text = "LEVEL COMPLETE ! Press R"
+
+[connection signal="body_entered" from="Level1/Goal" to="Level1/Goal" method="_on_body_entered"]
