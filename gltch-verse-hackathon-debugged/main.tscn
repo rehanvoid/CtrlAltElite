@@ -5,6 +5,13 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0xm2m"]
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_o6u5s"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jspg8"]
+albedo_color = Color(0, 0.08627451, 1, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hmudf"]
 albedo_color = Color(0.101960786, 0.101960786, 0.18039216, 1)
 
@@ -68,8 +75,17 @@ script = ExtResource("1_ig7tw")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=2076937463]
 shape = SubResource("CapsuleShape3D_0xm2m")
 
-[node name="Camera3D" type="Camera3D" parent="Player" unique_id=307765028]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+[node name="CameraPivot" type="Node3D" parent="Player" unique_id=1292288098]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Player/CameraPivot" unique_id=95113002]
+spring_length = 4.5
+
+[node name="Camera3D" type="Camera3D" parent="Player/CameraPivot/SpringArm3D" unique_id=307765028]
+
+[node name="Visual" type="MeshInstance3D" parent="Player" unique_id=201468983]
+mesh = SubResource("CapsuleMesh_o6u5s")
+surface_material_override/0 = SubResource("StandardMaterial3D_jspg8")
 
 [node name="Level1" type="Node3D" parent="." unique_id=2121321819]
 
@@ -127,7 +143,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.5, -24)
 shape = SubResource("BoxShape3D_ddffp")
 
 [node name="Goal" type="Area3D" parent="Level1" unique_id=1217639444]
-position = Vector3(4, 3, -24)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, -24)
 script = ExtResource("2_0xm2m")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level1/Goal" unique_id=1034653658]
