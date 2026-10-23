@@ -18,6 +18,14 @@ albedo_color = Color(0.101960786, 0.101960786, 0.18039216, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_o6u5s"]
 size = Vector3(10, 1, 10)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
+albedo_color = Color(0.1254902, 0.16862746, 0.2509804, 1)
+metallic = 0.6
+roughness = 0.35
+emission_enabled = true
+emission = Color(0, 0.8509804, 1, 1)
+emission_energy_multiplier = 2.0
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_jspg8"]
 size = Vector3(10, 1, 10)
 
@@ -66,6 +74,15 @@ size = Vector3(2, 2, 2)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y2m7j"]
 albedo_color = Color(0, 1, 0.4, 1)
 
+[sub_resource type="Environment" id="Environment_o6u5s"]
+background_mode = 1
+ambient_light_color = Color(0.0627451, 0.09411765, 0.16862746, 1)
+ambient_light_energy = 0.65
+glow_enabled = true
+glow_intensity = 0.6
+glow_bloom = 0.2
+glow_hdr_threshold = 0.9
+
 [node name="Main" type="Node3D" unique_id=1009966630]
 
 [node name="Player" type="CharacterBody3D" parent="." unique_id=524491024]
@@ -94,6 +111,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_jspg8")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level1/Floor" unique_id=1902613307]
 material_override = SubResource("StandardMaterial3D_hmudf")
 mesh = SubResource("BoxMesh_o6u5s")
+surface_material_override/0 = SubResource("StandardMaterial3D_0xm2m")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level1/Floor" unique_id=951000767]
 shape = SubResource("BoxShape3D_jspg8")
@@ -163,5 +181,39 @@ offset_right = 40.0
 offset_bottom = 49.0
 theme_override_font_sizes/font_size = 48
 text = "LEVEL COMPLETE ! Press R"
+
+[node name="Sunlight" type="DirectionalLight3D" parent="." unique_id=1812240311]
+transform = Transform3D(0.8660254, 0.3535534, -0.3535534, 0, 0.7071068, 0.7071068, 0.5, -0.61237246, 0.61237246, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=581859996]
+environment = SubResource("Environment_o6u5s")
+
+[node name="GameHUD" type="CanvasLayer" parent="." unique_id=319556661]
+
+[node name="HUDLayout" type="Control" parent="GameHUD" unique_id=1032928611]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StageTitle" type="Label" parent="GameHUD/HUDLayout" unique_id=1455298338]
+layout_mode = 1
+offset_left = 30.0
+offset_top = 25.0
+offset_right = 340.0
+offset_bottom = 59.0
+theme_override_font_sizes/font_size = 24
+text = "GLITCHVERSE // SECTOR 01"
+
+[node name="ObjectiveLabel" type="Label" parent="GameHUD/HUDLayout" unique_id=435943113]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 60.0
+offset_right = 228.0
+offset_bottom = 83.0
+text = "OBJECTIVE: FIND THE EXIT"
 
 [connection signal="body_entered" from="Level1/Goal" to="Level1/Goal" method="_on_body_entered"]
